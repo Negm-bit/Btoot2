@@ -68,7 +68,7 @@ button{
   padding:0 20px;
 }
 
-/* Floating hearts */
+/* Floating hearts for opening */
 .floatHeart{
   position:absolute;
   bottom:-20px;
@@ -223,51 +223,19 @@ button{
   width:100%;
 }
 
-/* بحبك داخل برواز صغير ومتوهج */
-#loveText{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:22px; /* حجم صغير جدا */
-  color:#ff4da6;
+/* كل فقاعه بحبك */
+.loveBubble{
+  position:absolute;
+  background: rgba(255,182,193,0.4); /* وردي شفاف */
+  border: 2px solid #ff99cc;
+  border-radius:15px;
+  padding:5px 12px;
+  font-size:20px;
   font-weight:bold;
-  z-index:500;
-  opacity:0;
-  pointer-events:none;
-  text-align:center;
-  border:2px solid #ff99cc; /* أصغر سمك */
-  padding:8px 15px; /* أصغر padding */
-  border-radius:12px;
-  background:rgba(255,255,255,0.05);
-  box-shadow:0 0 10px rgba(255,105,180,0.5); /* أخف توهج */
-  font-family:'Cairo',sans-serif;
+  color:#ff4da6;
+  box-shadow:0 0 10px rgba(255,105,180,0.5);
   white-space:nowrap;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-}
-
-/* Responsive */
-@media (max-width:500px){
-  .card{padding:20px;}
-  .profile img{width:100px; height:100px;}
-  .profile div{font-size:20px;}
-  .counterBox{padding:12px; font-size:16px;}
-  .photoBox{min-width:160px; max-width:200px;}
-  .galleryTitle h3{font-size:18px;}
-  .addBtn{width:50px; height:50px; font-size:24px;}
-  .songBox img{width:60px; height:60px;}
-  .songBox .songInfo{font-size:14px;}
-  .songBox audio{width:100%;}
-  #loveText{
-    font-size:18px; /* أصغر حجم على الموبايل */
-    padding:6px 12px;
-    border-radius:10px;
-    gap:4px;
-  }
-  .section{padding:15px; margin:20px 0;}
+  pointer-events:none;
 }
 </style>
 </head>
@@ -335,11 +303,9 @@ button{
 
 </div>
 
-<div id="loveText">بحبك ي بطوووووط 💕💕💕💕💕💕</div>
-
 <script>
-const USERNAME="admin";
-const PASSWORD="1234";
+const USERNAME="Wezza";
+const PASSWORD="20/6";
 
 function login(){
   if(user.value===USERNAME && pass.value===PASSWORD){
@@ -348,9 +314,11 @@ function login(){
   }else alert("غلط ينور عيني تعالي اديكي الباس الصح🥰");
 }
 
+// شاشة الافتتاحية مع قلوب
 function startOpening(){
   const opening=document.getElementById('opening');
   opening.style.display='flex';
+
   for(let i=0;i<75;i++){
     let heart=document.createElement('div');
     heart.className='floatHeart';
@@ -360,9 +328,11 @@ function startOpening(){
     heart.style.animationDuration=(5+Math.random()*4)+'s';
     opening.appendChild(heart);
   }
+
   setTimeout(()=>{
     opening.style.display='none';
     document.getElementById('site').style.display='block';
+    document.querySelectorAll('#opening .floatHeart').forEach(h=>h.remove());
   },4000);
 }
 
@@ -379,26 +349,23 @@ function updateCounter(){
 setInterval(updateCounter,1000);
 updateCounter();
 
+// زرار الحب: فقاعات كل واحدة في بروازها الخاص
 function showLove(){
-  const loveText = document.getElementById('loveText');
-  loveText.style.opacity = 1;
-
-  document.querySelectorAll('.floatHeart').forEach(h => h.remove());
-
   for(let i=0;i<100;i++){
-    let heart = document.createElement('div');
-    heart.className='floatHeart';
-    heart.style.left = Math.random()*100 + '%';
-    heart.style.fontSize = (20 + Math.random()*30) + 'px';
-    heart.innerHTML='💗';
-    heart.style.animationDuration = (4 + Math.random()*4)+'s';
-    document.body.appendChild(heart);
-  }
+    const bubble = document.createElement('div');
+    bubble.className = 'loveBubble';
+    bubble.innerText = 'بحبك 💕';
+    bubble.style.left = Math.random()*(window.innerWidth-120)+'px';
+    bubble.style.top = Math.random()*(window.innerHeight-40)+'px';
+    document.body.appendChild(bubble);
 
-  setTimeout(()=>{
-    loveText.style.opacity = 0;
-    document.querySelectorAll('.floatHeart').forEach(h => h.remove());
-  },5000);
+    bubble.animate([
+      { transform: 'translateY(0)', opacity:1 },
+      { transform: `translateY(-${50 + Math.random()*100}px)`, opacity:0 }
+    ], { duration: 1000  + Math.random()*5000, easing: 'ease-out' });
+
+    setTimeout(()=>{ bubble.remove(); }, 5000 + Math.random()*500);
+  }
 }
 </script>
 
