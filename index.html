@@ -119,6 +119,7 @@ button{
   font-weight:bold;
 }
 
+/* Gallery */
 .galleryTitle{
   display:flex;
   justify-content:flex-end;
@@ -227,25 +228,25 @@ button{
   position:fixed;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%); /* بدون ميل */
-  font-size:48px;
+  transform:translate(-50%,-50%);
+  font-size:36px; /* صغرنا الحجم */
   color:#ff4da6;
   font-weight:bold;
   z-index:500;
   opacity:0;
   pointer-events:none;
   text-align:center;
-  border:5px solid #ff99cc; /* البرواز الوردي */
-  padding:20px 40px;
-  border-radius:25px;
+  border:3px solid #ff99cc; /* صغرنا سمك البرواز */
+  padding:15px 25px; /* صغرنا البادينج */
+  border-radius:20px;
   background:rgba(255,255,255,0.05);
-  box-shadow:0 0 25px rgba(255,105,180,0.7); /* توهج */
+  box-shadow:0 0 15px rgba(255,105,180,0.7); /* صغرنا التوهج */
   font-family:'Cairo',sans-serif;
   white-space:nowrap;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px; /* المسافة بين الكلمة والإيموجي */
+  gap:8px;
 }
 
 /* Responsive */
@@ -253,14 +254,19 @@ button{
   .card{padding:20px;}
   .profile img{width:100px; height:100px;}
   .profile div{font-size:20px;}
-  .counterBox{padding:15px; font-size:18px;}
+  .counterBox{padding:12px; font-size:16px;}
   .photoBox{min-width:160px; max-width:200px;}
   .galleryTitle h3{font-size:18px;}
   .addBtn{width:50px; height:50px; font-size:24px;}
   .songBox img{width:60px; height:60px;}
   .songBox .songInfo{font-size:14px;}
   .songBox audio{width:100%;}
-  #loveText{font-size:36px; padding:15px 30px;}
+  #loveText{
+    font-size:28px; /* أصغر على الموبايل */
+    padding:10px 20px;
+    border-radius:15px;
+    gap:6px;
+  }
   .section{padding:15px; margin:20px 0;}
 }
 </style>
@@ -350,7 +356,7 @@ function startOpening(){
     heart.className='floatHeart';
     heart.style.left=Math.random()*100+'%';
     heart.innerHTML='💗';
-heart.style.fontSize = (20 + Math.random()*50) + 'px'; // حجم القلوب من 20px لـ 70px
+    heart.style.fontSize = (20 + Math.random()*50) + 'px';
     heart.style.animationDuration=(5+Math.random()*4)+'s';
     opening.appendChild(heart);
   }
