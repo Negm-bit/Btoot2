@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>❤️ Batoot</title>
+<title>💘 Batoot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
@@ -225,7 +225,7 @@ button{
 
 /* كل فقاعه بحبك */
 .loveBubble{
-  position:absolute;
+  position:fixed;
   background: rgba(255,182,193,0.4); /* وردي شفاف */
   border: 2px solid #ff99cc;
   border-radius:15px;
@@ -258,7 +258,7 @@ button{
 
   <div class="profile">
     <img src="profile.jpg" alt="صورة البروفايل">
-    <div>❤️ Batoot</div>
+    <div>💘 Batoot</div>
   </div>
 
   <div class="counterBox" id="counter"></div>
@@ -268,7 +268,7 @@ button{
       <span style="font-size:18px; font-weight:bold;">اضغطي هنا ينور عيني</span>
       <button class="addBtn" onclick="showLove()">❤️</button>
     </div>
-    <h3 style="margin-left:0; align-self:flex-start;">Memories</h3>
+    <h3 style="margin-left:0; align-self:flex-start;">✨ Memories</h3>
   </div>
 
   <div class="gallery" id="gallery">
@@ -276,11 +276,11 @@ button{
     <div class="photoBox"><img src="photo3.jpg">اول حضن ده كان غريب اوي بالنسبالي 😂❤️<div></div></div>
     <div class="photoBox"><img src="photo2.jpg"><div>انا بعشق الصوره دي 💕</div></div>
     <div class="photoBox"><video src="video1.mp4" controls></video><div>واحد من احلي ايام حياتي ❤️❤️</div></div>
-    <div class="photoBox"><img src="photo5.jpg"><div>تقريبا يوميها نسيت اقولك ان النيلز كانت تحفههه💕💕</div></div>
+    <div class="photoBox"><img src="photo5.jpg"><div>تقريبا يوميها نسيت اقولك ان النيلز كانت تحفهههه💕💕💕</div></div>
     <div class="photoBox"><video src="video2.mp4" controls></video><div>شكرا ع الفلتر ي محترمه 😂❤️</div></div>
     <div class="photoBox"><video src="video3.mp4" controls></video><div>انا بعشق الفيديو ده بسببك </div></div>
     <div class="photoBox"><img src="photo4.jpg"><div>اليوم ده مايتنسيش بكل تفاصيله ❤️</div></div>
-    <div class="photoBox"><img src="photo6.jpg"><div>اول مره سينما مع اجمل بنوته ف الكون 💕</div></div>
+    <div class="photoBox"><img src="photo6.jpg"><div>اول مره سينما مع اجمل بنوته ف الكون 🌍💕</div></div>
     <div class="photoBox"><video src="video5.mp4" controls></video><div>فيديو مليان دفي  بحس اني بحضن بنتي ❤️❤️</div></div>
     <div class="photoBox"><video src="video4.mp4" controls></video><div>رياكنشك وانتي جد حوااار 😂😂❤️</div></div>
   </div>
@@ -351,7 +351,7 @@ updateCounter();
 
 // زرار الحب: فقاعات كل واحدة في بروازها الخاص
 function showLove(){
-  for(let i=0;i<100;i++){
+  for(let i=0;i<80;i++){
     const bubble = document.createElement('div');
     bubble.className = 'loveBubble';
     bubble.innerText = 'بحبك 💕';
