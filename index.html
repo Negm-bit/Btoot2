@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>❤️ Batoot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
   margin:0;
@@ -13,18 +14,21 @@ body{
   overflow-x:hidden;
 }
 
+/* Login */
 #login{
   display:flex;
   height:100vh;
   justify-content:center;
   align-items:center;
+  padding:10px;
 }
 .card{
   background:#ffffffcc;
-  padding:40px;
+  padding:30px;
   border-radius:25px;
   text-align:center;
-  width:320px;
+  width:90%;
+  max-width:350px;
   box-shadow:0 10px 40px rgba(255,105,180,.3);
 }
 input{
@@ -33,16 +37,19 @@ input{
   margin:10px 0;
   border:1px solid #ffc0cb;
   border-radius:15px;
+  font-size:16px;
 }
 button{
-  padding:10px 25px;
+  padding:10px 20px;
   border:none;
   border-radius:25px;
   background:#ff8fcf;
   color:#fff;
+  font-size:16px;
   cursor:pointer;
 }
 
+/* Opening */
 #opening{
   display:none;
   position:fixed;
@@ -51,31 +58,39 @@ button{
   justify-content:center;
   align-items:center;
   overflow:hidden;
+  z-index:1000;
 }
 #opening h1{
   position:relative;
   z-index:2;
-  font-size:34px;
+  font-size:28px;
+  text-align:center;
+  padding:0 20px;
 }
+
+/* Floating hearts */
 .floatHeart{
   position:absolute;
   bottom:-20px;
   font-size:22px;
   opacity:.6;
-  animation:floatUp 7s linear infinite;
+  animation-name: floatUpPulse;
+  animation-timing-function: linear;
 }
-@keyframes floatUp{
-  from{transform:translateY(0)}
-  to{transform:translateY(-110vh)}
+@keyframes floatUpPulse {
+  0% { transform:translateY(0) scale(0.5); opacity:1; }
+  50% { transform:translateY(-50vh) scale(1); opacity:0.7; }
+  100% { transform:translateY(-100vh) scale(1.2); opacity:0; }
 }
 
-#site{display:none;padding:20px}
+/* Site */
+#site{display:none;padding:15px;}
 
 .profile{
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-bottom:30px;
+  margin-bottom:25px;
 }
 .profile img{
   width:120px;
@@ -88,11 +103,13 @@ button{
 .profile div{
   font-size:22px;
   font-weight:bold;
+  text-align:center;
 }
 
 .counterBox{
-  margin:0 auto 30px;
-  width:70%;
+  margin:0 auto 25px;
+  width:90%;
+  max-width:350px;
   text-align:center;
   padding:20px;
   border:2px solid #ffb6d9;
@@ -107,15 +124,13 @@ button{
   justify-content:flex-end;
   align-items:center;
   gap:10px;
-  flex-direction:column; /* لنجعل النص والزرار تحت Memories */
+  flex-direction:column;
   margin:20px 0;
 }
-
 .galleryTitle h3{
   margin:0;
-  align-self:flex-end; /* فوق على اليمين */
+  align-self:flex-start;
 }
-
 .galleryTitle .actionRow{
   display:flex;
   gap:10px;
@@ -128,10 +143,12 @@ button{
   display:flex;
   gap:20px;
   overflow-x:auto;
+  padding-bottom:10px;
 }
+
 .photoBox{
-  min-width:250px;
-  max-width:300px;
+  min-width:220px;
+  max-width:280px;
   padding:10px;
   border:2px solid #ffc0cb;
   border-radius:20px;
@@ -140,15 +157,21 @@ button{
   align-items:center;
   background:#fff;
   flex-direction:column;
+  flex-shrink:0;
 }
 .photoBox img, .photoBox video{
   width:100%;
   height:auto;
-  object-fit:contain;
+  object-fit:cover;
   border-radius:15px;
   margin-bottom:8px;
 }
 
+/* Love button pulse */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
 .addBtn{
   width:60px;
   height:60px;
@@ -162,12 +185,13 @@ button{
   box-shadow:0 5px 15px rgba(255,105,180,.4);
   transition:.3s;
   cursor:pointer;
+  animation: pulse 1s infinite;
 }
-
 .addBtn:hover{
   transform:scale(1.1) rotate(10deg);
 }
 
+/* Sections */
 .section{
   margin:40px 0;
   padding:20px;
@@ -180,6 +204,7 @@ button{
   align-items:center;
   gap:15px;
   margin-bottom:20px;
+  flex-wrap:wrap;
 }
 .songBox img{
   width:80px;
@@ -191,20 +216,52 @@ button{
   display:flex;
   flex-direction:column;
   justify-content:center;
+  flex:1;
+}
+.songBox audio{
+  width:100%;
 }
 
-/* نص بحبك فوق الصور */
+/* بحبك داخل برواز مستقيم ومتوهج */
 #loveText{
-  position:absolute;
+  position:fixed;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%);
-  font-size:50px;
-  color:#ff0066;
+  transform:translate(-50%,-50%); /* بدون ميل */
+  font-size:48px;
+  color:#ff4da6;
   font-weight:bold;
   z-index:500;
   opacity:0;
-  transition: opacity 0.5s;
+  pointer-events:none;
+  text-align:center;
+  border:5px solid #ff99cc; /* البرواز الوردي */
+  padding:20px 40px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 0 25px rgba(255,105,180,0.7); /* توهج */
+  font-family:'Cairo',sans-serif;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px; /* المسافة بين الكلمة والإيموجي */
+}
+
+/* Responsive */
+@media (max-width:500px){
+  .card{padding:20px;}
+  .profile img{width:100px; height:100px;}
+  .profile div{font-size:20px;}
+  .counterBox{padding:15px; font-size:18px;}
+  .photoBox{min-width:160px; max-width:200px;}
+  .galleryTitle h3{font-size:18px;}
+  .addBtn{width:50px; height:50px; font-size:24px;}
+  .songBox img{width:60px; height:60px;}
+  .songBox .songInfo{font-size:14px;}
+  .songBox audio{width:100%;}
+  #loveText{font-size:36px; padding:15px 30px;}
+  .section{padding:15px; margin:20px 0;}
 }
 </style>
 </head>
@@ -225,44 +282,35 @@ button{
 
 <div id="site">
 
-  <!-- صورة واسم البروفايل -->
   <div class="profile">
     <img src="profile.jpg" alt="صورة البروفايل">
     <div>❤️ Batoot</div>
   </div>
 
-  <!-- عداد الأيام -->
   <div class="counterBox" id="counter"></div>
 
-  <!-- معرض الصور والفيديوهات -->
   <div class="galleryTitle">
-  <div class="actionRow">
-    <span style="font-size:18px; font-weight:bold;">اضغطي هنا ينور عيني</span>
-    <button class="addBtn" onclick="showLove()">❤️</button>
+    <div class="actionRow">
+      <span style="font-size:18px; font-weight:bold;">اضغطي هنا ينور عيني</span>
+      <button class="addBtn" onclick="showLove()">❤️</button>
+    </div>
+    <h3 style="margin-left:0; align-self:flex-start;">Memories</h3>
   </div>
-<h3 style="margin-left:0; align-self:flex-start;">Memories</h3>
-</div>
 
   <div class="gallery" id="gallery">
-
-    <!-- الصور -->
-    <div class="photoBox"><img src="photo1.jpg"><div>لمسه بتداوي كل جروح الدنيا</div></div>
-    <div class="photoBox"><img src="photo2.jpg"><div>كابشن 2</div></div>
-    <div class="photoBox"><img src="photo3.jpg"><div>كابشن 3</div></div>
-    <div class="photoBox"><img src="photo4.jpg"><div>كابشن 4</div></div>
-    <div class="photoBox"><img src="photo5.jpg"><div>كابشن 5</div></div>
-    <div class="photoBox"><img src="photo6.jpg"><div>كابشن 6</div></div>
-
-    <!-- الفيديوهات -->
-    <div class="photoBox"><video src="video1.mp4" controls></video><div>كابشن فيديو 1</div></div>
-    <div class="photoBox"><video src="video2.mp4" controls></video><div>كابشن فيديو 2</div></div>
-    <div class="photoBox"><video src="video3.mp4" controls></video><div>كابشن فيديو 3</div></div>
-    <div class="photoBox"><video src="video4.mp4" controls></video><div>كابشن فيديو 2</div></div>
-    <div class="photoBox"><video src="video5.mp4" controls></video><div>كابشن فيديو 3</div></div>
-
+    <div class="photoBox"><img src="photo1.jpg"><div>راحة الدنيا كلها ف ماسكة الايد دي ❤️</div></div>
+    <div class="photoBox"><img src="photo3.jpg">اول حضن ده كان غريب اوي بالنسبالي 😂❤️<div></div></div>
+    <div class="photoBox"><img src="photo2.jpg"><div>انا بعشق الصوره دي 💕</div></div>
+    <div class="photoBox"><video src="video1.mp4" controls></video><div>واحد من احلي ايام حياتي ❤️❤️</div></div>
+    <div class="photoBox"><img src="photo5.jpg"><div>تقريبا يوميها نسيت اقولك ان النيلز كانت تحفههه💕💕</div></div>
+    <div class="photoBox"><video src="video2.mp4" controls></video><div>شكرا ع الفلتر ي محترمه 😂❤️</div></div>
+    <div class="photoBox"><video src="video3.mp4" controls></video><div>انا بعشق الفيديو ده بسببك </div></div>
+    <div class="photoBox"><img src="photo4.jpg"><div>اليوم ده مايتنسيش بكل تفاصيله ❤️</div></div>
+    <div class="photoBox"><img src="photo6.jpg"><div>اول مره سينما مع اجمل بنوته ف الكون 💕</div></div>
+    <div class="photoBox"><video src="video5.mp4" controls></video><div>فيديو مليان دفي  بحس اني بحضن بنتي ❤️❤️</div></div>
+    <div class="photoBox"><video src="video4.mp4" controls></video><div>رياكنشك وانتي جد حواار 😂😂❤️</div></div>
   </div>
 
-  <!-- الأغنية مع الغلاف -->
   <div class="section">
     <h3>🎵 Fav Song</h3>
     <div class="songBox">
@@ -274,16 +322,14 @@ button{
     </div>
   </div>
 
-  <!-- الرسالة -->
   <div class="section">
-    <h3>💕 Message To My Heart </h3>
+    <h3>💕 To My Soulmate </h3>
     <p>اكتب رسالتك هنا 💕</p>
   </div>
 
 </div>
 
-<!-- نص بحبك -->
-<div id="loveText">بحبكككك ❤️</div>
+<div id="loveText">بحبك ي بطوووووط 💕💕💕💕💕💕</div>
 
 <script>
 const USERNAME="admin";
@@ -304,6 +350,7 @@ function startOpening(){
     heart.className='floatHeart';
     heart.style.left=Math.random()*100+'%';
     heart.innerHTML='💗';
+heart.style.fontSize = (20 + Math.random()*50) + 'px'; // حجم القلوب من 20px لـ 70px
     heart.style.animationDuration=(5+Math.random()*4)+'s';
     opening.appendChild(heart);
   }
@@ -326,16 +373,13 @@ function updateCounter(){
 setInterval(updateCounter,1000);
 updateCounter();
 
-// وظيفة الحب والقلوب
 function showLove(){
   const loveText = document.getElementById('loveText');
   loveText.style.opacity = 1;
 
-  // إزالة أي قلوب موجودة قبل
   document.querySelectorAll('.floatHeart').forEach(h => h.remove());
 
-  // إنشاء قلوب كثيرة
-  for(let i=0;i<50;i++){
+  for(let i=0;i<100;i++){
     let heart = document.createElement('div');
     heart.className='floatHeart';
     heart.style.left = Math.random()*100 + '%';
@@ -345,7 +389,6 @@ function showLove(){
     document.body.appendChild(heart);
   }
 
-  // اختفاء النص بعد 5 ثواني
   setTimeout(()=>{
     loveText.style.opacity = 0;
     document.querySelectorAll('.floatHeart').forEach(h => h.remove());
