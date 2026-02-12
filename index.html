@@ -351,7 +351,7 @@ updateCounter();
 
 // زرار الحب: فقاعات كل واحدة في بروازها الخاص
 function showLove(){
-  for(let i=0;i<50;i++){
+  for(let i=0;i<100;i++){
     const bubble = document.createElement('div');
     bubble.className = 'loveBubble';
     bubble.innerText = 'بحبك 💕';
@@ -360,9 +360,9 @@ function showLove(){
     document.body.appendChild(bubble);
 
     bubble.animate([
-      { transform: 'translateY(0)', opacity:1 },
+      { transform: 'translateY(1)', opacity:0 },
       { transform: `translateY(-${50 + Math.random()*100}px)`, opacity:0 }
-    ], { duration: 1000  + Math.random()*5000, easing: 'ease-out' });
+    ], { duration: 0000  + Math.random()*5000, easing: 'ease-out' });
 
     setTimeout(()=>{ bubble.remove(); }, 5000 + Math.random()*500);
   }
@@ -372,4 +372,3 @@ function showLove(){
 </body>
 
 </html>
-
