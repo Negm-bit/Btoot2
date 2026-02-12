@@ -200,6 +200,7 @@ button{
   border-radius:20px;
 }
 
+/* شريط الموسيقى والصور متجاوب */
 .songBox{
   display:flex;
   align-items:center;
@@ -212,6 +213,7 @@ button{
   height:80px;
   border-radius:10px;
   object-fit:cover;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 .songBox .songInfo{
   display:flex;
@@ -219,8 +221,16 @@ button{
   justify-content:center;
   flex:1;
 }
-.songBox audio{
-  width:100%;
+.songBox audio {
+  width: 100%;
+  max-width: 500px;
+  height: 45px;
+  border-radius: 10px;
+  outline: none;
+  transition: opacity 0.5s ease;
+}
+.songBox #songTitle {
+  transition: opacity 0.5s ease;
 }
 
 /* كل فقاعه بحبك */
@@ -286,12 +296,15 @@ button{
   </div>
 
   <div class="section">
-    <h3>🎵 Fav Song</h3>
+    <h3>🎵 Fav Songs</h3>
     <div class="songBox">
-      <img src="cover.jpg" alt="صورة الأغنية">
+      <img src="cover1.jpg" id="songCover" alt="صورة الأغنية">
       <div class="songInfo">
-        <div style="font-weight:bold;">Eid Al Hob</div>
-        <audio controls src="song.mp3"></audio>
+        <div id="songTitle" style="font-weight:bold;">Eid Al Hob</div>
+        <audio controls id="audioPlayer" src="song1.mp3"></audio>
+        <button onclick="nextSong()" style="margin-top:10px; padding:8px 15px; border:none; border-radius:8px; background:#ff8fcf; color:#fff; cursor:pointer;">
+          تبديل الأغنية 🎵
+        </button>
       </div>
     </div>
   </div>
@@ -308,10 +321,15 @@ const USERNAME="Wezza";
 const PASSWORD="1234";
 
 function login(){
-  if(user.value===USERNAME && pass.value===PASSWORD){
+  const userInput = document.getElementById('user').value;
+  const passInput = document.getElementById('pass').value;
+
+  if(userInput === USERNAME && passInput === PASSWORD){
     document.getElementById('login').style.display='none';
     startOpening();
-  }else alert("غلط ينور عيني تعالي اديكي الباس الصح🥰");
+  } else {
+    alert("غلط ينور عيني تعالي اديكي الباس الصح🥰");
+  }
 }
 
 // شاشة الافتتاحية مع قلوب
@@ -336,6 +354,7 @@ function startOpening(){
   },4000);
 }
 
+// العد التنازلي
 function updateCounter(){
   const target=new Date('2025-06-20T00:00:00');
   const now=new Date();
@@ -344,12 +363,12 @@ function updateCounter(){
   const h=Math.floor(diff/(1000*60*60))%24;
   const m=Math.floor(diff/(1000*60))%60;
   const s=Math.floor(diff/(1000))%60;
-  counter.innerText=`${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية ❤️`;
+  document.getElementById('counter').innerText=`${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية ❤️`;
 }
 setInterval(updateCounter,1000);
 updateCounter();
 
-// زرار الحب: فقاعات كل واحدة في بروازها الخاص
+// فقاعات الحب
 function showLove(){
   for(let i=0;i<80;i++){
     const bubble = document.createElement('div');
@@ -362,13 +381,61 @@ function showLove(){
     bubble.animate([
       { transform: 'translateY(1)', opacity:0 },
       { transform: `translateY(-${50 + Math.random()*100}px)`, opacity:0 }
-    ], { duration: 0000  + Math.random()*5000, easing: 'ease-out' });
+    ], { duration: 1000 + Math.random()*5000, easing: 'ease-out' });
 
     setTimeout(()=>{ bubble.remove(); }, 5000 + Math.random()*500);
   }
 }
+
+// ----- Songs -----
+const songs = [
+  { title: "Eid Al-Hob", src: "song1.mp3", cover: "cover1.jpg" },
+  { title: "M3ayaa", src: "song2.mp3", cover: "cover2.jpg" },
+  { title: "Asjel Rouhie", src: "song3.mp3", cover: "cover3.jpg" },
+  { title: "Khalik M3aya", src: "song4.mp3", cover: "cover4.jpg" },
+  { title: "Ana El-Sakran", src: "song5.mp3", cover: "cover5.jpg" },
+  { title: "Matet3wadsh", src: "song6.mp3", cover: "cover6.jpg" }
+];
+
+let currentSong = 0;
+
+function nextSong(){
+  const audio = document.getElementById("audioPlayer");
+  const title = document.getElementById("songTitle");
+  const cover = document.getElementById("songCover");
+
+  // تحريك الصورة للخارج
+  cover.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+  cover.style.transform = "translateX(-100%)";
+  cover.style.opacity = "0";
+  title.style.opacity = "0";
+  audio.style.opacity = "0";
+
+  setTimeout(()=>{
+    currentSong = (currentSong + 1) % songs.length;
+
+    // تغيير المصادر قبل العودة
+    audio.src = songs[currentSong].src;
+    cover.src = songs[currentSong].cover;
+    title.innerText = songs[currentSong].title;
+
+    // مباشرة نحرك الصورة من اليمين
+    cover.style.transition = "none";
+    cover.style.transform = "translateX(100%)";
+    cover.style.opacity = "1";
+
+    // إعادة الانتقال بسلاسة
+    setTimeout(()=>{
+      cover.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+      cover.style.transform = "translateX(0)";
+      title.style.opacity = "1";
+      audio.style.opacity = "1";
+      audio.play();
+    },50);
+
+  },500);
+}
 </script>
 
 </body>
-
 </html>
