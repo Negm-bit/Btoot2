@@ -223,30 +223,30 @@ button{
   width:100%;
 }
 
-/* بحبك داخل برواز مستقيم ومتوهج */
+/* بحبك داخل برواز صغير ومتوهج */
 #loveText{
   position:fixed;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  font-size:36px; /* صغرنا الحجم */
+  font-size:22px; /* حجم صغير جدا */
   color:#ff4da6;
   font-weight:bold;
   z-index:500;
   opacity:0;
   pointer-events:none;
   text-align:center;
-  border:3px solid #ff99cc; /* صغرنا سمك البرواز */
-  padding:15px 25px; /* صغرنا البادينج */
-  border-radius:20px;
+  border:2px solid #ff99cc; /* أصغر سمك */
+  padding:8px 15px; /* أصغر padding */
+  border-radius:12px;
   background:rgba(255,255,255,0.05);
-  box-shadow:0 0 15px rgba(255,105,180,0.7); /* صغرنا التوهج */
+  box-shadow:0 0 10px rgba(255,105,180,0.5); /* أخف توهج */
   font-family:'Cairo',sans-serif;
   white-space:nowrap;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:6px;
 }
 
 /* Responsive */
@@ -262,10 +262,10 @@ button{
   .songBox .songInfo{font-size:14px;}
   .songBox audio{width:100%;}
   #loveText{
-    font-size:28px; /* أصغر على الموبايل */
-    padding:10px 20px;
-    border-radius:15px;
-    gap:6px;
+    font-size:18px; /* أصغر حجم على الموبايل */
+    padding:6px 12px;
+    border-radius:10px;
+    gap:4px;
   }
   .section{padding:15px; margin:20px 0;}
 }
